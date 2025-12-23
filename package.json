@@ -6,10 +6,16 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "format": "prettier --write ."
   },
   "dependencies": {
+    "canvas-confetti": "^1.9.4",
+    "html-to-image": "^1.11.13",
+    "lucide-react": "^0.562.0",
+    "motion": "^12.23.26",
     "next": "16.1.0",
+    "octokit": "^5.0.5",
     "react": "19.2.3",
     "react-dom": "19.2.3"
   },
@@ -20,6 +26,8 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.1.0",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.7.4",
     "tailwindcss": "^4",
     "typescript": "^5"
   },
