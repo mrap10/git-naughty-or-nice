@@ -1,4 +1,5 @@
 import LandingView from "@/components/LandingView";
+import StoryView from "@/components/StoryView";
 import Link from "next/link";
 
 export default function Home() {
@@ -9,6 +10,7 @@ export default function Home() {
       
       <main className="flex flex-col items-center justify-center min-h-screen px-4">
         <LandingView />
+        <StoryView />
       </main>
 
       <footer>
