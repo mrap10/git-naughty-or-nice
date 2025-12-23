@@ -1,21 +1,12 @@
 "use client";
 
+import { UserStats } from "@/lib/types";
 import { Code2, Flame, GitCommit } from "lucide-react";
 import { useEffect, useState } from "react";
 
 interface StoryViewProps {
     stats?: UserStats;
     onComplete?: () => void;
-}
-
-export interface UserStats {
-    username: string;
-    totalCommits: number;
-    topLanguage: string;
-    longestStreak: number;
-    isNaughty: boolean;
-    verdictReason: string;
-    grade: string;
 }
 
 // todo: after adding github fetching, need to make these optional props to required
