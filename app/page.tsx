@@ -1,16 +1,25 @@
+"use client";
+
 import LandingView from "@/components/LandingView";
 import StoryView from "@/components/StoryView";
+import { UserStats } from "@/lib/types";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function Home() {
+  const [stats, setStats] = useState<UserStats | null>(null);
+
   return (
     <div className="min-h-screen bg-black text-slate-200 selection:bg-red-500/30 overflow-hidden relative">
       <div className="fixed top-[-20%] right-[-10%] w-[600px] h-[600px] bg-red-600/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="fixed bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-emerald-600/5 rounded-full blur-[100px] pointer-events-none" />
       
       <main className="flex flex-col items-center justify-center min-h-screen px-4">
-        <LandingView />
-        <StoryView />
+        {!stats ? (
+          <LandingView onStatsFetched={setStats} />
+        ) : (
+          <StoryView stats={stats} onComplete={() => {}} />
+        )}
       </main>
 
       <footer>

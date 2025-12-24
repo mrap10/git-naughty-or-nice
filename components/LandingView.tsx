@@ -1,8 +1,12 @@
+import { UserStats } from "@/lib/types";
 import { Code2, GitCommit, GithubIcon, Terminal } from "lucide-react";
 import Searchbar from "./Searchbar";
 
-// todo: add interface and props after github fetching route done
-export default function LandingView() {
+interface LandingViewProps {
+    onStatsFetched: (stats: UserStats) => void;
+}
+
+export default function LandingView({ onStatsFetched }: LandingViewProps) {
     return (
         <div className="w-full max-w-md text-center space-y-8">
             <div className="space-y-2">
@@ -21,7 +25,7 @@ export default function LandingView() {
                 </p>
             </div>
             
-            <Searchbar />
+            <Searchbar onSuccess={onStatsFetched} />
 
             <div className="flex justify-center gap-4 text-sm text-slate-400 font-mono">
                 <span className="flex items-center gap-1"><Terminal size={12}/> Public Repos</span>

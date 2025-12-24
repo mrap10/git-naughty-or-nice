@@ -6,4 +6,8 @@ export interface UserStats {
     isNaughty: boolean;
     verdictReason: string;
     grade: string;
+    commitText: string;
+    languageText: string;
+    prCount: number;
+    prText: string;
 }

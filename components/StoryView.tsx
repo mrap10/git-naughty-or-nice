@@ -1,7 +1,7 @@
 "use client";
 
 import { UserStats } from "@/lib/types";
-import { Code2, Flame, GitCommit } from "lucide-react";
+import { Code2, Flame, GitCommit, GitPullRequest } from "lucide-react";
 import { useEffect, useState } from "react";
 
 interface StoryViewProps {
@@ -9,7 +9,7 @@ interface StoryViewProps {
     onComplete?: () => void;
 }
 
-// todo: after adding github fetching, need to make these optional props to required
+// props: optional or required?
 export default function StoryView({ stats, onComplete }: StoryViewProps) {
     const [currentSlide, setCurrentSlide] = useState(0);
     const slides = [
@@ -28,7 +28,7 @@ export default function StoryView({ stats, onComplete }: StoryViewProps) {
                         <p className="text-slate-400 uppercase tracking-widest">Commits in 2025</p>
                     </div>
                     <p className="text-slate-300 max-w-[250px]">
-                        You have been a busy bee this year!
+                        {stats?.commitText}
                     </p>
                 </div>
             )
@@ -47,7 +47,26 @@ export default function StoryView({ stats, onComplete }: StoryViewProps) {
                         <p className="text-slate-400 uppercase tracking-widest">Most Used</p>
                     </div>
                     <p className="text-slate-300 max-w-[250px]">
-                        {stats?.username}, your favorite coding language shows your true colors!
+                        {stats?.languageText}
+                    </p>
+                </div>
+            )
+        }, {
+            bg: "bg-slate-900",
+            content: (
+                <div className="flex flex-col items-center text-center space-y-6">
+                    <div className="w-32 h-32 rounded-full bg-purple-500/10 flex items-center justify-center border border-purple-500/20 mb-4">
+                        <GitPullRequest size={48} className="text-purple-400" />
+                    </div>
+                    <h1 className="text-3xl font-bold">The Collaboration</h1>
+                    <div className="space-y-1">
+                        <p className="text-5xl font-black text-purple-500 font-mono tracking-tighter">
+                            {stats?.prCount}
+                        </p>
+                        <p className="text-slate-400 uppercase tracking-widest">PRs Merged</p>
+                    </div>
+                    <p className="text-slate-300 max-w-[250px]">
+                        {stats?.prText}
                     </p>
                 </div>
             )

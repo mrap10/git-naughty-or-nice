@@ -1,3 +1,4 @@
+import { calculateStats } from "@/lib/algorithm";
 import { getLanguageStats, getRepoCommits, getStarsAndForks, getTopRepo, getUser, getUserPublicRepos } from "@/lib/github";
 
 export async function GET(request: Request, { params }: { params: { username: string } }) {
@@ -7,22 +8,31 @@ export async function GET(request: Request, { params }: { params: { username: st
         return new Response(JSON.stringify({ error: "Username is required" }), { status: 400 });
     }
 
-    const user = await getUser(username);
-    const repos = await getUserPublicRepos(username);
-    const { stars, forks } = getStarsAndForks(repos);
-    const languages = await getLanguageStats(username, repos);
-    const topRepo = getTopRepo(repos);
-    const commitCount = await getRepoCommits(username);
+    try {
+        const user = await getUser(username);
+        const repos = await getUserPublicRepos(username);
+        const { stars, forks } = getStarsAndForks(repos);
+        const languages = await getLanguageStats(username, repos);
+        const topRepo = getTopRepo(repos);
+        const commitCount = await getRepoCommits(username);
 
-    return new Response(JSON.stringify({
-        user,
-        repos: {
-            public_repos: user.public_repos,
-            stars,
-            forks,
-            topRepo,
-            languages,
-        },
-        commitCount,
-    }), { status: 200 });
+        const rawData = {
+            user,
+            repos: {
+                public_repos: user.public_repos,
+                stars,
+                forks,
+                topRepo,
+                languages,
+            },
+            commitCount,
+        };
+
+        const stats = calculateStats(rawData);
+
+        return new Response(JSON.stringify(stats), { status: 200 });
+    } catch (error) {
+        console.error(error);
+        return new Response(JSON.stringify({ error: "Failed to analyze user" }), { status: 500 });
+    }
 }
