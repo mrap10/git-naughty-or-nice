@@ -24,8 +24,8 @@ export default function Toast({ message, onClose }: ToastProps) {
     >
       <AlertCircle size={18} className="text-red-500" />
       <span className="text-sm font-medium font-jetbrains">{message}</span>
-      <button 
-        onClick={onClose} 
+      <button
+        onClick={onClose}
         className="ml-2 p-1 hover:bg-red-500/20 rounded-full transition-colors"
       >
         <X size={14} />

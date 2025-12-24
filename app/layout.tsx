@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Cedarville_Cursive, JetBrains_Mono, Space_Grotesk } from "next/font/google";
+import {
+  Geist,
+  Geist_Mono,
+  Cedarville_Cursive,
+  JetBrains_Mono,
+  Space_Grotesk,
+} from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -41,10 +47,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${cedarvilleCursive.variable} ${jetBrainsMono.variable} ${spaceGrotesk.variable} antialiased`}>
-      <body>
-        {children}
-      </body>
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable} ${cedarvilleCursive.variable} ${jetBrainsMono.variable} ${spaceGrotesk.variable} antialiased`}
+    >
+      <body>{children}</body>
     </html>
   );
 }

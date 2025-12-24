@@ -1,204 +1,223 @@
 "use client";
 
 import { UserStats } from "@/lib/types";
-import { Code2, Flame, GitCommit, GitPullRequest, Pause, Play, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  Code2,
+  Flame,
+  GitCommit,
+  GitPullRequest,
+  Pause,
+  Play,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 
 interface StoryViewProps {
-    stats: UserStats;
-    onComplete: () => void;
+  stats: UserStats;
+  onComplete: () => void;
 }
 
 export default function StoryView({ stats, onComplete }: StoryViewProps) {
-    const [currentSlide, setCurrentSlide] = useState(0);
-    const [isPaused, setIsPaused] = useState(false);
-    const slides = [
-        {
-            bg: "bg-gray-950",
-            content: (
-                <div className="flex flex-col items-center text-center space-y-6">
-                    <div className="w-32 h-32 rounded-full bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20 mb-4 shadow-[0_0_30px_rgba(16,185,129,0.2)]">
-                        <GitCommit size={48} className="text-emerald-400" />
-                    </div>
-                    <h1 className="text-3xl font-bold font-grotesk">The Grind</h1>
-                    <div className="space-y-1">
-                        <p className="text-5xl font-black text-emerald-500 tracking-tighter font-jetbrains">
-                            {stats.totalCommits}
-                        </p>
-                        <p className="text-slate-400 uppercase tracking-widest font-grotesk">Commits in 2025</p>
-                        <p className="text-slate-400 font-mono text-xs tracking-wide">(Public Repos)</p>
-                    </div>
-                    <p className="text-slate-300 italic max-w-[250px]">
-                        {stats.commitText}
-                    </p>
-                </div>
-            )
-        }, {
-            bg: "bg-gray-950",
-            content: (
-                <div className="flex flex-col items-center text-center space-y-6">
-                    <div className="w-32 h-32 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20 mb-4 shadow-[0_0_30px_rgba(59,130,246,0.2)]">
-                        <Code2 size={48} className="text-blue-400" />
-                    </div>
-                    <h1 className="text-3xl font-bold font-grotesk">The Tongue</h1>
-                    <div className="space-y-1">
-                        <p className="text-5xl font-black text-blue-500 font-jetbrains tracking-tighter">
-                            {stats.topLanguage}
-                        </p>
-                        <p className="text-slate-400 uppercase tracking-widest font-grotesk">Most Used</p>
-                    </div>
-                    <p className="text-slate-300 italic max-w-[250px]">
-                        {stats.languageText}
-                    </p>
-                </div>
-            )
-        }, {
-            bg: "bg-gray-950",
-            content: (
-                <div className="flex flex-col items-center text-center space-y-6">
-                    <div className="w-32 h-32 rounded-full bg-purple-500/10 flex items-center justify-center border border-purple-500/20 mb-4 shadow-[0_0_30px_rgba(139,92,246,0.2)]">
-                        <GitPullRequest size={48} className="text-purple-400" />
-                    </div>
-                    <h1 className="text-3xl font-bold font-grotesk">The Collaboration</h1>
-                    <div className="space-y-1">
-                        <p className="text-5xl font-black text-purple-500 font-jetbrains tracking-tighter">
-                            {stats.prCount}
-                        </p>
-                        <p className="text-slate-400 uppercase tracking-widest font-grotesk">PRs Merged</p>
-                    </div>
-                    <p className="text-slate-300 italic max-w-[250px]">
-                        {stats.prText}
-                    </p>
-                </div>
-            )
-        }, {
-            bg: "bg-gray-950",
-            content: (
-                <div className="flex flex-col items-center text-center space-y-8">
-                    <div className="relative">
-                        <div className="absolute -inset-4 bg-red-500/20 blur-xl rounded-full animate-pulse"/>
-                        <Flame size={64} className="text-red-400 relative z-10" />
-                    </div>
-                    <h1 className="text-4xl font-bold uppercase tracking-widest font-grotesk">The Verdict</h1>
-                    <p className="text-slate-400 font-jetbrains text-sm">
-                        Calculating your naughty or nice status...
-                    </p>
-                </div>
-            )
-        }
-    ]
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const slides = [
+    {
+      bg: "bg-gray-950",
+      content: (
+        <div className="flex flex-col items-center text-center space-y-6">
+          <div className="w-32 h-32 rounded-full bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20 mb-4 shadow-[0_0_30px_rgba(16,185,129,0.2)]">
+            <GitCommit size={48} className="text-emerald-400" />
+          </div>
+          <h1 className="text-3xl font-bold font-grotesk">The Grind</h1>
+          <div className="space-y-1">
+            <p className="text-5xl font-black text-emerald-500 tracking-tighter font-jetbrains">
+              {stats.totalCommits}
+            </p>
+            <p className="text-slate-400 uppercase tracking-widest font-grotesk">Commits in 2025</p>
+            <p className="text-slate-400 font-mono text-xs tracking-wide">(Public Repos)</p>
+          </div>
+          <p className="text-slate-300 italic max-w-[250px]">{stats.commitText}</p>
+        </div>
+      ),
+    },
+    {
+      bg: "bg-gray-950",
+      content: (
+        <div className="flex flex-col items-center text-center space-y-6">
+          <div className="w-32 h-32 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20 mb-4 shadow-[0_0_30px_rgba(59,130,246,0.2)]">
+            <Code2 size={48} className="text-blue-400" />
+          </div>
+          <h1 className="text-3xl font-bold font-grotesk">The Tongue</h1>
+          <div className="space-y-1">
+            <p className="text-5xl font-black text-blue-500 font-jetbrains tracking-tighter">
+              {stats.topLanguage}
+            </p>
+            <p className="text-slate-400 uppercase tracking-widest font-grotesk">Most Used</p>
+          </div>
+          <p className="text-slate-300 italic max-w-[250px]">{stats.languageText}</p>
+        </div>
+      ),
+    },
+    {
+      bg: "bg-gray-950",
+      content: (
+        <div className="flex flex-col items-center text-center space-y-6">
+          <div className="w-32 h-32 rounded-full bg-purple-500/10 flex items-center justify-center border border-purple-500/20 mb-4 shadow-[0_0_30px_rgba(139,92,246,0.2)]">
+            <GitPullRequest size={48} className="text-purple-400" />
+          </div>
+          <h1 className="text-3xl font-bold font-grotesk">The Collaboration</h1>
+          <div className="space-y-1">
+            <p className="text-5xl font-black text-purple-500 font-jetbrains tracking-tighter">
+              {stats.prCount}
+            </p>
+            <p className="text-slate-400 uppercase tracking-widest font-grotesk">PRs Merged</p>
+          </div>
+          <p className="text-slate-300 italic max-w-[250px]">{stats.prText}</p>
+        </div>
+      ),
+    },
+    {
+      bg: "bg-gray-950",
+      content: (
+        <div className="flex flex-col items-center text-center space-y-8">
+          <div className="relative">
+            <div className="absolute -inset-4 bg-red-500/20 blur-xl rounded-full animate-pulse" />
+            <Flame size={64} className="text-red-400 relative z-10" />
+          </div>
+          <h1 className="text-4xl font-bold uppercase tracking-widest font-grotesk">The Verdict</h1>
+          <p className="text-slate-400 font-jetbrains text-sm">
+            Calculating your naughty or nice status...
+          </p>
+        </div>
+      ),
+    },
+  ];
 
-    useEffect(() => {
-        if (isPaused) return;
+  useEffect(() => {
+    if (isPaused) return;
 
-        const timer = setTimeout(() => {
-            if (currentSlide < slides.length - 1) {
-                setCurrentSlide(currentSlide + 1);
-            } else {
-                onComplete();
-            }
-        }, 4000);
-        return () => clearTimeout(timer);
-    }, [currentSlide, onComplete, slides.length, isPaused]);
+    const timer = setTimeout(() => {
+      if (currentSlide < slides.length - 1) {
+        setCurrentSlide(currentSlide + 1);
+      } else {
+        onComplete();
+      }
+    }, 4000);
+    return () => clearTimeout(timer);
+  }, [currentSlide, onComplete, slides.length, isPaused]);
 
-    const handleNext = () => {
-        setIsPaused(false);
-        if (currentSlide < slides.length - 1) {
-            setCurrentSlide(c => c + 1);
-        } else {
-            onComplete();
-        }
-    };
+  const handleNext = () => {
+    setIsPaused(false);
+    if (currentSlide < slides.length - 1) {
+      setCurrentSlide((c) => c + 1);
+    } else {
+      onComplete();
+    }
+  };
 
-    const handlePrev = () => {
-        setIsPaused(false)
-        if (currentSlide > 0) {
-            setCurrentSlide(c => c - 1);
-        }
-    };
-    
-    return (
-        <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="relative w-full max-w-sm aspect-[9/16] bg-black rounded-2xl border border-slate-800 shadow-2xl overflow-hidden flex flex-col"
-        >
-            <style>{`
+  const handlePrev = () => {
+    setIsPaused(false);
+    if (currentSlide > 0) {
+      setCurrentSlide((c) => c - 1);
+    }
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      className="relative w-full max-w-sm aspect-[9/16] bg-black rounded-2xl border border-slate-800 shadow-2xl overflow-hidden flex flex-col"
+    >
+      <style>{`
                 @keyframes grow {
                     from { width: 0%; }
                     to { width: 100%; }
                 }
             `}</style>
 
-            <div className="absolute top-0 left-0 right-0 p-2 z-20 flex gap-1">
-                {slides.map((_, index) => (
-                    <div key={index} className="h-1 flex-1 bg-slate-800 rounded-full overflow-hidden">
-                        <div
-                            className="h-full bg-white"
-                            style={{
-                                width: index < currentSlide ? "100%" : "0%",
-                                animationName: index === currentSlide ? "grow" : "none",
-                                animationDuration: "4s",
-                                animationTimingFunction: "linear",
-                                animationFillMode: "forwards",
-                                animationPlayState: isPaused ? "paused" : "running"
-                            }}
-                        />
-                    </div>
-                ))}
-            </div>
+      <div className="absolute top-0 left-0 right-0 p-2 z-20 flex gap-1">
+        {slides.map((_, index) => (
+          <div key={index} className="h-1 flex-1 bg-slate-800 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-white"
+              style={{
+                width: index < currentSlide ? "100%" : "0%",
+                animationName: index === currentSlide ? "grow" : "none",
+                animationDuration: "4s",
+                animationTimingFunction: "linear",
+                animationFillMode: "forwards",
+                animationPlayState: isPaused ? "paused" : "running",
+              }}
+            />
+          </div>
+        ))}
+      </div>
 
-            <div className="absolute inset-0 z-10 flex flex-col justify-between p-4 pointer-events-none">
-                <div className="flex justify-end pointer-events-auto">
-                     <button onClick={() => setIsPaused(!isPaused)} className="p-2 bg-black/20 backdrop-blur-sm rounded-full hover:bg-black/40 transition-colors text-white/70 hover:text-white cursor-pointer">
-                        {isPaused ? <Play size={20} fill="currentColor" /> : <Pause size={20} fill="currentColor" />}
-                     </button>
-                </div>
+      <div className="absolute inset-0 z-10 flex flex-col justify-between p-4 pointer-events-none">
+        <div className="flex justify-end pointer-events-auto">
+          <button
+            onClick={() => setIsPaused(!isPaused)}
+            className="p-2 bg-black/20 backdrop-blur-sm rounded-full hover:bg-black/40 transition-colors text-white/70 hover:text-white cursor-pointer"
+          >
+            {isPaused ? (
+              <Play size={20} fill="currentColor" />
+            ) : (
+              <Pause size={20} fill="currentColor" />
+            )}
+          </button>
+        </div>
 
-                <div className="flex justify-between items-center w-full px-2">
-                    <div className="pointer-events-auto">
-                        {currentSlide > 0 && (
-                            <button onClick={handlePrev} className="bg-black/20 backdrop-blur-sm rounded-full hover:bg-black/40 transition-colors text-white/20 hover:text-white cursor-pointer">
-                                <ChevronLeft size={24} />
-                            </button>
-                        )}
-                    </div>
-                    <div className="pointer-events-auto">
-                        {currentSlide < slides.length - 1 && (
-                            <button onClick={handleNext} className="bg-black/20 backdrop-blur-sm rounded-full hover:bg-black/40 transition-colors text-white/20 hover:text-white cursor-pointer">
-                                <ChevronRight size={24} />
-                            </button>
-                        )}
-                    </div>
-                </div>
-                
-                <div />
-            </div>
+        <div className="flex justify-between items-center w-full px-2">
+          <div className="pointer-events-auto">
+            {currentSlide > 0 && (
+              <button
+                onClick={handlePrev}
+                className="bg-black/20 backdrop-blur-sm rounded-full hover:bg-black/40 transition-colors text-white/20 hover:text-white cursor-pointer"
+              >
+                <ChevronLeft size={24} />
+              </button>
+            )}
+          </div>
+          <div className="pointer-events-auto">
+            {currentSlide < slides.length - 1 && (
+              <button
+                onClick={handleNext}
+                className="bg-black/20 backdrop-blur-sm rounded-full hover:bg-black/40 transition-colors text-white/20 hover:text-white cursor-pointer"
+              >
+                <ChevronRight size={24} />
+              </button>
+            )}
+          </div>
+        </div>
 
-            <div className="absolute inset-0 z-0 flex">
-                <div className="w-1/3 h-full" onClick={handlePrev} />
-                <div className="w-2/3 h-full" onClick={handleNext} />
-            </div>
+        <div />
+      </div>
 
-            <div className="flex-1 flex items-center justify-center p-6 relative z-0">
-                <AnimatePresence mode="wait">
-                    <motion.div
-                        key={currentSlide}
-                        initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
-                        animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                        exit={{ opacity: 0, scale: 1.1, rotate: 2 }}
-                        transition={{ type: "spring", bounce: 0.4 }}
-                        className="w-full"
-                    >
-                        {slides[currentSlide].content}
-                    </motion.div>
-                </AnimatePresence>
-            </div>
+      <div className="absolute inset-0 z-0 flex">
+        <div className="w-1/3 h-full" onClick={handlePrev} />
+        <div className="w-2/3 h-full" onClick={handleNext} />
+      </div>
 
-            <div className="absolute bottom-6 w-full text-center text-xs font-jetbrains text-slate-600">
-                NAUGHTY OR NICE 2025
-            </div>
-        </motion.div>
-    )
+      <div className="flex-1 flex items-center justify-center p-6 relative z-0">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentSlide}
+            initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
+            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+            exit={{ opacity: 0, scale: 1.1, rotate: 2 }}
+            transition={{ type: "spring", bounce: 0.4 }}
+            className="w-full"
+          >
+            {slides[currentSlide].content}
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      <div className="absolute bottom-6 w-full text-center text-xs font-jetbrains text-slate-600">
+        NAUGHTY OR NICE 2025
+      </div>
+    </motion.div>
+  );
 }

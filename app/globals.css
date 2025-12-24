@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-    --font-cursive: var(--font-cedarville);
-    --font-jetbrains: var(--font-jetbrains-mono);
-    --font-grotesk: var(--font-space-grotesk);
+  --font-cursive: var(--font-cedarville);
+  --font-jetbrains: var(--font-jetbrains-mono);
+  --font-grotesk: var(--font-space-grotesk);
 }
