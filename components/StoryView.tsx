@@ -21,12 +21,12 @@ export default function StoryView({ stats, onComplete }: StoryViewProps) {
                     <div className="w-32 h-32 rounded-full bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20 mb-4 shadow-[0_0_30px_rgba(16,185,129,0.2)]">
                         <GitCommit size={48} className="text-emerald-400" />
                     </div>
-                    <h1 className="text-3xl font-bold">The Grind</h1>
+                    <h1 className="text-3xl font-bold font-grotesk">The Grind</h1>
                     <div className="space-y-1">
-                        <p className="text-5xl font-black text-emerald-500 font-mono tracking-tighter">
+                        <p className="text-5xl font-black text-emerald-500 tracking-tighter font-jetbrains">
                             {stats.totalCommits}
                         </p>
-                        <p className="text-slate-400 uppercase tracking-widest">Commits in 2025</p>
+                        <p className="text-slate-400 uppercase tracking-widest font-grotesk">Commits in 2025</p>
                         <p className="text-slate-400 font-mono text-xs tracking-wide">(Public Repos)</p>
                     </div>
                     <p className="text-slate-300 italic max-w-[250px]">
@@ -41,12 +41,12 @@ export default function StoryView({ stats, onComplete }: StoryViewProps) {
                     <div className="w-32 h-32 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20 mb-4 shadow-[0_0_30px_rgba(59,130,246,0.2)]">
                         <Code2 size={48} className="text-blue-400" />
                     </div>
-                    <h1 className="text-3xl font-bold">The Tongue</h1>
+                    <h1 className="text-3xl font-bold font-grotesk">The Tongue</h1>
                     <div className="space-y-1">
-                        <p className="text-5xl font-black text-blue-500 font-mono tracking-tighter">
+                        <p className="text-5xl font-black text-blue-500 font-jetbrains tracking-tighter">
                             {stats.topLanguage}
                         </p>
-                        <p className="text-slate-400 uppercase tracking-widest">Most Used</p>
+                        <p className="text-slate-400 uppercase tracking-widest font-grotesk">Most Used</p>
                     </div>
                     <p className="text-slate-300 italic max-w-[250px]">
                         {stats.languageText}
@@ -60,12 +60,12 @@ export default function StoryView({ stats, onComplete }: StoryViewProps) {
                     <div className="w-32 h-32 rounded-full bg-purple-500/10 flex items-center justify-center border border-purple-500/20 mb-4 shadow-[0_0_30px_rgba(139,92,246,0.2)]">
                         <GitPullRequest size={48} className="text-purple-400" />
                     </div>
-                    <h1 className="text-3xl font-bold">The Collaboration</h1>
+                    <h1 className="text-3xl font-bold font-grotesk">The Collaboration</h1>
                     <div className="space-y-1">
-                        <p className="text-5xl font-black text-purple-500 font-mono tracking-tighter">
+                        <p className="text-5xl font-black text-purple-500 font-jetbrains tracking-tighter">
                             {stats.prCount}
                         </p>
-                        <p className="text-slate-400 uppercase tracking-widest">PRs Merged</p>
+                        <p className="text-slate-400 uppercase tracking-widest font-grotesk">PRs Merged</p>
                     </div>
                     <p className="text-slate-300 italic max-w-[250px]">
                         {stats.prText}
@@ -80,8 +80,8 @@ export default function StoryView({ stats, onComplete }: StoryViewProps) {
                         <div className="absolute -inset-4 bg-red-500/20 blur-xl rounded-full animate-pulse"/>
                         <Flame size={64} className="text-red-400 relative z-10" />
                     </div>
-                    <h1 className="text-4xl font-bold uppercase tracking-widest">The Verdict</h1>
-                    <p className="text-slate-400 font-mono text-sm">
+                    <h1 className="text-4xl font-bold uppercase tracking-widest font-grotesk">The Verdict</h1>
+                    <p className="text-slate-400 font-jetbrains text-sm">
                         Calculating your naughty or nice status...
                     </p>
                 </div>
@@ -196,7 +196,7 @@ export default function StoryView({ stats, onComplete }: StoryViewProps) {
                 </AnimatePresence>
             </div>
 
-            <div className="absolute bottom-6 w-full text-center text-xs font-mono text-slate-600">
+            <div className="absolute bottom-6 w-full text-center text-xs font-jetbrains text-slate-600">
                 NAUGHTY OR NICE 2025
             </div>
         </motion.div>

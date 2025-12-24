@@ -55,10 +55,10 @@ export default function ResultView({ stats, onReset }: ResultViewProps) {
             className="flex flex-col items-center max-w-md w-full px-4 gap-4 my-2"
         >
             <div className="w-full flex items-center justify-between text-slate-400 font-mono">
-                <button onClick={onReset} className="flex items-center gap-2 hover:text-white cursor-pointer transition-colors text-sm">
+                <button onClick={onReset} className="flex items-center gap-2 font-jetbrains hover:text-white cursor-pointer transition-colors text-xs">
                     <RefreshCcw size={14} /> Try Another
                 </button>
-                <span className="text-sm border border-slate-800 px-2 py-1 rounded bg-slate-900/50">
+                <span className="text-xs border border-slate-800 font-jetbrains px-2 py-1 rounded bg-slate-900/50">
                     Found a bug? Report {" "}
                     <Link href={"https://github.com/mrap10/naughty-or-nice/issues"} className="underline cursor-pointer text-red-500">here</Link>
                 </span>
@@ -69,43 +69,43 @@ export default function ResultView({ stats, onReset }: ResultViewProps) {
 
                 <div className="border-b-2 border-slate-900 pb-4 mb-6 flex justify-between items-start">
                     <div>
-                        <h1 className="font-serif font-black text-2xl uppercase tracking-tighter">North Pole</h1>
-                        <p className="font-mono text-xs text-slate-600">Department of Code & Conduct</p>
+                        <h1 className="font-grotesk font-black text-2xl uppercase tracking-tighter">North Pole</h1>
+                        <p className="font-jetbrains text-xs text-slate-600">Department of Code & Conduct</p>
                     </div>
                     <div className="w-12 h-12 bg-red-700 rounded-full flex items-center justify-center text-white font-serif font-bold text-xs shadow-sm border-2 border-red-800">
                         2025
                     </div>
                 </div>
 
-                <div className="space-y-6 font-mono text-sm relative z-10">
+                <div className="space-y-6 font-jetbrains text-sm relative z-10">
                     <div className="flex items-end justify-between border-b border-slate-300 pb-1">
-                        <span className="text-slate-500 text-sm uppercase font-medium">Developer</span>
+                        <span className="text-slate-500 text-sm uppercase font-medium font-grotesk">Developer</span>
                         <span className="font-bold text-lg">@{stats.username}</span>
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
                         <div className="bg-slate-100 p-3 border border-slate-200">
-                            <span className="text-slate-500 text-sm block mb-1">Commits (Public)</span>
+                            <span className="text-slate-500 text-sm block mb-1 font-grotesk">Commits (Public)</span>
                             <span className="font-bold text-xl">{stats.totalCommits}</span>
                         </div>
                         <div className="bg-slate-100 p-3 border border-slate-200">
-                            <span className="text-slate-500 text-sm block mb-1">Top Tech</span>
+                            <span className="text-slate-500 text-sm block mb-1 font-grotesk">Top Tech</span>
                             <span className="font-bold text-xl">{stats.topLanguage}</span>
                         </div>
                         <div className="bg-slate-100 p-3 border border-slate-200">
-                            <span className="text-slate-500 text-sm block mb-1">Longest Streak</span>
+                            <span className="text-slate-500 text-sm block mb-1 font-grotesk">Longest Streak</span>
                             <span className="font-bold text-xl">{stats.longestStreak} days</span>
                         </div>
                         {stats.stars > 0 && (
                             <div className="bg-slate-100 p-3 border border-slate-200">
-                                <span className="text-slate-500 text-sm block mb-1">Stars Received</span>
+                                <span className="text-slate-500 text-sm block mb-1 font-grotesk">Stars Received</span>
                                 <span className="font-bold text-xl">{stats.stars}</span>
                             </div>
                         )}
                     </div>
 
                     <div className="py-4 text-center relative">
-                        <span className="text-slate-500 text-xs uppercase tracking-widest mb-2 block">Official Status</span>
+                        <span className="text-slate-500 text-xs uppercase tracking-widest mb-2 block font-grotesk">Official Status</span>
                         <div className={`inline-block px-8 py-2 font-black text-3xl uppercase tracking-widest transform -rotate-12 mask-stamp border rounded-lg ${stats.isNaughty ? "border-red-600 text-red-600" : "border-emerald-700 text-emerald-700"}`}>
                             {stats.isNaughty ? "NAUGHTY" : "NICE"}
                         </div>
@@ -117,7 +117,7 @@ export default function ResultView({ stats, onReset }: ResultViewProps) {
                 </div>
 
                 <div className="mt-8 pt-4 border-t-2 border-slate-900 flex justify-between items-center opacity-70">
-                    <div className="text-[10px] leading-tight font-sans">
+                    <div className="text-[10px] leading-tight font-jetbrains">
                         AUTH: S.CLAUS <br />
                         ID: NP-{Math.floor(Math.random() * 900000 + 100000)}
                     </div>
@@ -126,11 +126,11 @@ export default function ResultView({ stats, onReset }: ResultViewProps) {
             </div>
 
             <div className="flex gap-4 w-full">
-                <button onClick={handleDownload} className="flex-1 bg-white hover:bg-slate-200 text-slate-900 cursor-pointer font-bold py-3 rounded-lg flex items-center justify-center gap-2 transition-colors">
+                <button onClick={handleDownload} className="flex-1 bg-white hover:bg-slate-200 text-slate-900 font-grotesk cursor-pointer font-bold py-3 rounded-lg flex items-center justify-center gap-2 transition-colors">
                     <Download size={18} /> Download
                 </button>
 
-                <button onClick={handleShare} className="flex-1 bg-sky-500 hover:bg-sky-600 text-white cursor-pointer font-bold py-3 rounded-lg flex items-center justify-center gap-2 transition-colors">
+                <button onClick={handleShare} className="flex-1 bg-sky-500 hover:bg-sky-600 text-white font-grotesk cursor-pointer font-bold py-3 rounded-lg flex items-center justify-center gap-2 transition-colors">
                     <Share2 size={18} /> Share 
                 </button>
             </div>

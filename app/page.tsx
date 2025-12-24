@@ -9,11 +9,13 @@ import Link from "next/link";
 import { useState } from "react";
 import { AnimatePresence } from "motion/react";
 import Snowfall from "@/components/Snowfall";
+import Toast from "@/components/Toast";
 
 export default function Home() {
   const [stats, setStats] = useState<UserStats | null>(null);
   const [currentView, setCurrentView] = useState<AppState>("LANDING");
   const [username, setUsername] = useState<string>("");
+  const [error, setError] = useState<string | null>(null);
 
   const handleAnalyze = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,10 +33,8 @@ export default function Home() {
       setStats(data);
       setCurrentView("STORY");
     } catch (err) {
-      console.error("Error fetching analysis:", err);
       setCurrentView("LANDING");
-      // todo: better error handling through loadingView (?)
-      alert("Failed to analyze profile. Please check the username.");
+      setError("Failed to analyze profile. Please check the username.");
     }
   }
 
@@ -47,6 +47,9 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-black text-slate-200 selection:bg-red-500/30 overflow-hidden relative">
       <Snowfall />
+      <AnimatePresence>
+        {error && <Toast message={error} onClose={() => setError(null)} />}
+      </AnimatePresence>
       
       <div className="fixed top-[-20%] right-[-10%] w-[600px] h-[600px] bg-red-600/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="fixed bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-emerald-600/5 rounded-full blur-[100px] pointer-events-none" />

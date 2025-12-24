@@ -2,4 +2,6 @@
 
 @theme {
     --font-cursive: var(--font-cedarville);
+    --font-jetbrains: var(--font-jetbrains-mono);
+    --font-grotesk: var(--font-space-grotesk);
 }
