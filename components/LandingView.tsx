@@ -1,5 +1,6 @@
 import { Code2, GitCommit, GithubIcon, Terminal } from "lucide-react";
 import { motion } from "motion/react";
+import Link from "next/link";
 
 interface LandingViewProps {
     username: string;

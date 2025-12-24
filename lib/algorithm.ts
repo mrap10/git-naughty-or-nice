@@ -47,7 +47,7 @@ export function calculateStats(data: any): UserStats {
 
     let verdictReason = "You've been doing okay.";
     if (grade === "S") verdictReason = "You're a coding machine! Santa is proud.";
-    else if (grade === "A") verdictReason = "Great work this year! Keep it up.";
+    else if (grade === "A") verdictReason = "Great work this year! Santa approves.";
     else if (grade === "B") verdictReason = "Solid effort, but there's room for more.";
     else verdictReason = "Someone's been slacking off... Coal for you!";
 

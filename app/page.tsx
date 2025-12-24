@@ -64,14 +64,14 @@ export default function Home() {
           )}
         </AnimatePresence>
       </main>
-
-      <footer>
-        <div className="w-full max-w-md text-center space-y-4 mx-auto py-6">
+      
+      {currentView === "LANDING" && (
+        <footer className="w-full max-w-md text-center space-y-4 mx-auto -mt-9">
           <p className="text-slate-500 font-mono">
-            Made with ❤️ by <Link href="https://github.com/mrap10" className="text-red-500">mrap10</Link>
+          Made with ❤️ by <Link href="https://github.com/mrap10" className="text-red-500">mrap10</Link>
           </p>
-        </div>
-      </footer>
+        </footer>
+      )}
     </div>
   );
 }
