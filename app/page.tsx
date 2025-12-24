@@ -7,6 +7,7 @@ import StoryView from "@/components/StoryView";
 import { AppState, UserStats } from "@/lib/types";
 import Link from "next/link";
 import { useState } from "react";
+import { AnimatePresence } from "motion/react";
 
 export default function Home() {
   const [stats, setStats] = useState<UserStats | null>(null);
@@ -48,18 +49,20 @@ export default function Home() {
       <div className="fixed bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-emerald-600/5 rounded-full blur-[100px] pointer-events-none" />
       
       <main className="flex flex-col items-center justify-center min-h-screen px-4">
-        {currentView === "LANDING" && (
-          <LandingView key="landing" username={username} setUsername={setUsername} handleSubmit={handleAnalyze} />
-        )}
-        {currentView === "LOADING" && (
-          <LoadingView key="loading" />
-        )}
-        {currentView === "STORY" && stats && (
-          <StoryView key="story" stats={stats} onComplete={() => setCurrentView("RESULT")} />
-        )}
-        {currentView === "RESULT" && stats && (
-          <ResultView key="result" stats={stats} onReset={handleReset} />
-        )}
+        <AnimatePresence mode="wait">
+          {currentView === "LANDING" && (
+            <LandingView key="landing" username={username} setUsername={setUsername} handleSubmit={handleAnalyze} />
+          )}
+          {currentView === "LOADING" && (
+            <LoadingView key="loading" />
+          )}
+          {currentView === "STORY" && stats && (
+            <StoryView key="story" stats={stats} onComplete={() => setCurrentView("RESULT")} />
+          )}
+          {currentView === "RESULT" && stats && (
+            <ResultView key="result" stats={stats} onReset={handleReset} />
+          )}
+        </AnimatePresence>
       </main>
 
       <footer>

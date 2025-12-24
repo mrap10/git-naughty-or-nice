@@ -1,8 +1,7 @@
-import { UserStats } from "@/lib/types";
 import { Code2, GitCommit, GithubIcon, Terminal } from "lucide-react";
+import { motion } from "motion/react";
 
 interface LandingViewProps {
-    // onStatsFetched: (stats: UserStats) => void;
     username: string;
     setUsername: (username: string) => void;
     handleSubmit: (e: React.FormEvent) => void;
@@ -10,7 +9,13 @@ interface LandingViewProps {
 
 export default function LandingView({ username, setUsername, handleSubmit }: LandingViewProps) {
     return (
-        <div className="w-full max-w-md text-center space-y-8">
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.5 }}
+            className="w-full max-w-md text-center space-y-8"
+        >
             <div className="space-y-2">
                 <div className="flex justify-around mb-6">
                     <div className="relative">
@@ -56,6 +61,6 @@ export default function LandingView({ username, setUsername, handleSubmit }: Lan
                 <span className="flex items-center gap-1"><GitCommit size={12}/> Commit Quality</span>
                 <span className="flex items-center gap-1"><Code2 size={12}/> Tech Stack</span>
             </div>
-        </div>
+        </motion.div>
     )
 }
