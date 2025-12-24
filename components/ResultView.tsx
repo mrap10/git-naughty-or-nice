@@ -3,6 +3,7 @@ import { Download, RefreshCcw, Share2 } from "lucide-react";
 import Link from "next/link";
 import { useRef } from "react";
 import { motion } from "motion/react";
+import * as htmlToImage from "html-to-image";
 
 interface ResultViewProps {
     stats: UserStats;
@@ -11,6 +12,42 @@ interface ResultViewProps {
 
 export default function ResultView({ stats, onReset }: ResultViewProps) {
     const certificateRef = useRef<HTMLDivElement>(null);
+
+    const handleDownload = () => {
+        if (!certificateRef.current) return;
+
+        htmlToImage.toPng(certificateRef.current)
+            .then((dataUrl) => {
+                const link = document.createElement('a');
+                link.download = `naughty-or-nice-certificate-${stats.username}.png`;
+                link.href = dataUrl;
+                link.click();
+            })
+            .catch((err) => {
+                console.error("Failed to download image:", err);
+            });
+    }
+
+    const handleShare = async () => {
+        if (!certificateRef.current || !navigator.share) {
+            alert("Sharing is not supported on this browser.");
+            return;
+        }
+        try {
+            const dataUrl = await htmlToImage.toPng(certificateRef.current);
+            const response = await fetch(dataUrl);
+            const blob = await response.blob();
+            const file = new File([blob], `naughty-or-nice-certificate-${stats.username}.png`, { type: blob.type });
+            await navigator.share({
+                title: "My Naughty or Nice Certificate",
+                text: `I just found out I'm ${stats.isNaughty ? "NAUGHTY" : "NICE"} on GitHub!`,
+                files: [file],
+            });
+        } catch (err) {
+            console.error("Failed to share certificate:", err);
+        }
+    }
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -79,11 +116,11 @@ export default function ResultView({ stats, onReset }: ResultViewProps) {
             </div>
 
             <div className="flex gap-4 w-full">
-                <button className="flex-1 bg-white hover:bg-slate-200 text-slate-900 cursor-pointer font-bold py-3 rounded-lg flex items-center justify-center gap-2 transition-colors">
+                <button onClick={handleDownload} className="flex-1 bg-white hover:bg-slate-200 text-slate-900 cursor-pointer font-bold py-3 rounded-lg flex items-center justify-center gap-2 transition-colors">
                     <Download size={18} /> Download
                 </button>
 
-                <button className="flex-1 bg-sky-500 hover:bg-sky-600 text-white cursor-pointer font-bold py-3 rounded-lg flex items-center justify-center gap-2 transition-colors">
+                <button onClick={handleShare} className="flex-1 bg-sky-500 hover:bg-sky-600 text-white cursor-pointer font-bold py-3 rounded-lg flex items-center justify-center gap-2 transition-colors">
                     <Share2 size={18} /> Share 
                 </button>
             </div>

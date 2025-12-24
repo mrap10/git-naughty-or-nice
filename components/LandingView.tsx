@@ -16,7 +16,13 @@ export default function LandingView({ username, setUsername, handleSubmit }: Lan
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.5 }}
             className="w-full max-w-md text-center space-y-8"
-        >
+        >   
+            <div className="absolute flex flex-col text-center font-cursive top-10 left-4 rotate-[-20deg] text-4xl text-slate-400">
+                <p className="text-emerald-500"><span className="text-red-500">Merry</span> Xmas!</p>
+            </div>
+            <Link href="https://github.com/mrap10/naughty-or-nice" target="_blank" rel="noopener noreferrer" className="absolute top-6 right-4 px-4 py-1 text-red-500 bg-slate-800 hover:bg-slate-900 transition-colors flex items-center gap-1 font-mono font-bold rounded-lg">
+                ⭐ on Github
+            </Link>
             <div className="space-y-2">
                 <div className="flex justify-around mb-6">
                     <div className="relative">
@@ -28,7 +34,7 @@ export default function LandingView({ username, setUsername, handleSubmit }: Lan
                     GIT <span className="text-red-500">NAUGHTY</span>
                     <br /> OR <span className="text-emerald-500">NICE </span>?
                 </h1>
-                <p className="text-slate-400 font-mono text-sm">
+                <p className="text-slate-400 font-mono text-sm mt-5">
                     Connect your GitHub to see if you deserve coal or code.
                 </p>
             </div>
@@ -50,7 +56,7 @@ export default function LandingView({ username, setUsername, handleSubmit }: Lan
                     <button
                         type="submit"
                         disabled={!username.trim()}
-                        className="bg-slate-100 hover:bg-slate-200 text-black cursor-pointer font-bold py-2 px-4 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 min-w-[100px] justify-center"
+                        className="bg-slate-100 hover:bg-slate-200 text-black cursor-pointer font-semibold py-2 px-4 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 min-w-[100px] justify-center"
                     >
                         Analyze
                     </button>

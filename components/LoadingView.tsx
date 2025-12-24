@@ -18,7 +18,7 @@ export default function LoadingView() {
             </div>
             <div className="text-center space-y-2">
                 <p className="font-mono text-emerald-400 animate-pulse">Contacting North Pole API...</p>
-                <p className="text-xs text-slate-500 font-mono">Scanning for `console.log` leftovers...</p>
+                <p className="text-sm text-slate-500 font-mono">Scanning for `console.log` leftovers...</p>
             </div>
         </motion.div>
     )
