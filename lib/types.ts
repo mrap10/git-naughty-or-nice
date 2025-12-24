@@ -11,3 +11,5 @@ export interface UserStats {
     prCount: number;
     prText: string;
 }
+
+export type AppState = "LANDING" | "LOADING" | "STORY" | "RESULT";

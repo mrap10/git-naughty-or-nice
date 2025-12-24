@@ -5,11 +5,10 @@ import { Code2, Flame, GitCommit, GitPullRequest } from "lucide-react";
 import { useEffect, useState } from "react";
 
 interface StoryViewProps {
-    stats?: UserStats;
-    onComplete?: () => void;
+    stats: UserStats;
+    onComplete: () => void;
 }
 
-// props: optional or required?
 export default function StoryView({ stats, onComplete }: StoryViewProps) {
     const [currentSlide, setCurrentSlide] = useState(0);
     const slides = [
@@ -23,12 +22,12 @@ export default function StoryView({ stats, onComplete }: StoryViewProps) {
                     <h1 className="text-3xl font-bold">The Grind</h1>
                     <div className="space-y-1">
                         <p className="text-5xl font-black text-emerald-500 font-mono tracking-tighter">
-                            {stats?.totalCommits}
+                            {stats.totalCommits}
                         </p>
                         <p className="text-slate-400 uppercase tracking-widest">Commits in 2025</p>
                     </div>
                     <p className="text-slate-300 max-w-[250px]">
-                        {stats?.commitText}
+                        {stats.commitText}
                     </p>
                 </div>
             )
@@ -42,12 +41,12 @@ export default function StoryView({ stats, onComplete }: StoryViewProps) {
                     <h1 className="text-3xl font-bold">The Tongue</h1>
                     <div className="space-y-1">
                         <p className="text-5xl font-black text-blue-500 font-mono tracking-tighter">
-                            {stats?.topLanguage}
+                            {stats.topLanguage}
                         </p>
                         <p className="text-slate-400 uppercase tracking-widest">Most Used</p>
                     </div>
                     <p className="text-slate-300 max-w-[250px]">
-                        {stats?.languageText}
+                        {stats.languageText}
                     </p>
                 </div>
             )
@@ -61,12 +60,12 @@ export default function StoryView({ stats, onComplete }: StoryViewProps) {
                     <h1 className="text-3xl font-bold">The Collaboration</h1>
                     <div className="space-y-1">
                         <p className="text-5xl font-black text-purple-500 font-mono tracking-tighter">
-                            {stats?.prCount}
+                            {stats.prCount}
                         </p>
                         <p className="text-slate-400 uppercase tracking-widest">PRs Merged</p>
                     </div>
                     <p className="text-slate-300 max-w-[250px]">
-                        {stats?.prText}
+                        {stats.prText}
                     </p>
                 </div>
             )
@@ -92,7 +91,7 @@ export default function StoryView({ stats, onComplete }: StoryViewProps) {
             if (currentSlide < slides.length - 1) {
                 setCurrentSlide(currentSlide + 1);
             } else {
-                onComplete?.();
+                onComplete();
             }
         }, 4000);
         return () => clearTimeout(timer);

@@ -1,13 +1,46 @@
 "use client";
 
 import LandingView from "@/components/LandingView";
+import LoadingView from "@/components/LoadingView";
+import ResultView from "@/components/ResultView";
 import StoryView from "@/components/StoryView";
-import { UserStats } from "@/lib/types";
+import { AppState, UserStats } from "@/lib/types";
 import Link from "next/link";
 import { useState } from "react";
 
 export default function Home() {
   const [stats, setStats] = useState<UserStats | null>(null);
+  const [currentView, setCurrentView] = useState<AppState>("LANDING");
+  const [username, setUsername] = useState<string>("");
+
+  const handleAnalyze = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!username.trim()) return;
+    setCurrentView("LOADING");
+
+    try {
+      const response = await fetch(`/api/analyze/${username.trim()}`);
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to analyze profile");
+      }
+
+      setStats(data);
+      setCurrentView("STORY");
+    } catch (err) {
+      console.error("Error fetching analysis:", err);
+      setCurrentView("LANDING");
+      // todo: better error handling through loadingView (?)
+      alert("Failed to analyze profile. Please check the username.");
+    }
+  }
+
+  const handleReset = () => {
+    setCurrentView("LANDING");
+    setUsername("");
+    setStats(null);
+  }
 
   return (
     <div className="min-h-screen bg-black text-slate-200 selection:bg-red-500/30 overflow-hidden relative">
@@ -15,10 +48,17 @@ export default function Home() {
       <div className="fixed bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-emerald-600/5 rounded-full blur-[100px] pointer-events-none" />
       
       <main className="flex flex-col items-center justify-center min-h-screen px-4">
-        {!stats ? (
-          <LandingView onStatsFetched={setStats} />
-        ) : (
-          <StoryView stats={stats} onComplete={() => {}} />
+        {currentView === "LANDING" && (
+          <LandingView key="landing" username={username} setUsername={setUsername} handleSubmit={handleAnalyze} />
+        )}
+        {currentView === "LOADING" && (
+          <LoadingView key="loading" />
+        )}
+        {currentView === "STORY" && stats && (
+          <StoryView key="story" stats={stats} onComplete={() => setCurrentView("RESULT")} />
+        )}
+        {currentView === "RESULT" && stats && (
+          <ResultView key="result" stats={stats} onReset={handleReset} />
         )}
       </main>
 
