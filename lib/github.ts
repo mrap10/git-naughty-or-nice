@@ -10,6 +10,7 @@ export async function getUser(username: string) {
     });
 
     return {
+        login: data.login,
         name: data.name,
         avatar_url: data.avatar_url,
         public_repos: data.public_repos,
@@ -43,24 +44,14 @@ export function getStarsAndForks(repos: any[]) {
     )
 }
 
-export async function getLanguageStats(username:string, repos: any[]) {
+export async function getLanguageStats(repos: any[]) {
     const languages: Record<string, number> = {};
 
-    const promises = repos.map(async (repo) => {
-        if (!repo.languages_url) return;
-
-        try {
-            const { data } = await octokit.request(repo.languages_url);
-
-            for (const [lang, bytes] of Object.entries(data)) {
-                languages[lang] = (languages[lang] || 0) + (bytes as number);
-            }
-        } catch (error) {
-            console.error(`Error fetching languages for ${repo.name}:`, error);
+    repos.forEach((repo) => {
+        if (repo.language) {
+            languages[repo.language] = (languages[repo.language] || 0) + 1;
         }
     });
-
-    await Promise.all(promises);
 
     return languages;
 }
@@ -73,7 +64,7 @@ export function getTopRepo(repos: any[]) {
     })
 }
 
-export async function getRepoCommits(username: string) {
+export async function getContributionStats(username: string) {
     const currentYear = new Date().getFullYear();
     const from = `${currentYear}-01-01T00:00:00Z`;
     const to = `${currentYear}-12-31T23:59:59Z`;
@@ -90,10 +81,8 @@ export async function getRepoCommits(username: string) {
                     totalPullRequestReviewContributions
                     totalIssueContributions
                     contributionCalendar {
-                        totalContributions
                         weeks {
                             contributionDays {
-                                date
                                 contributionCount
                             }
                         }
@@ -103,6 +92,40 @@ export async function getRepoCommits(username: string) {
         }
     `;
 
-    const response: any = await octokit.graphql(query, { username, from, to });
-    return response.user.contributionsCollection;
+    try {
+        const response: any = await octokit.graphql(query, { username, from, to });
+        const collection = response.user.contributionsCollection;
+
+        const totalCommits = collection.totalCommitContributions +
+                           collection.totalPullRequestContributions +
+                           collection.totalPullRequestReviewContributions +
+                           collection.totalIssueContributions;
+
+        let longestStreak = 0;
+        let currentStreak = 0;
+        for (const week of collection.contributionCalendar.weeks) {
+            for (const day of week.contributionDays) {
+                if (day.contributionCount > 0) {
+                    currentStreak++;
+                } else {
+                    longestStreak = Math.max(longestStreak, currentStreak);
+                    currentStreak = 0;
+                }
+            }
+        }
+        longestStreak = Math.max(longestStreak, currentStreak);
+
+        return {
+            totalCommits,
+            totalPullRequests: collection.totalPullRequestContributions,
+            longestStreak
+        };
+    } catch (error) {
+        console.error("Error fetching contributions:", error);
+        return {
+            totalCommits: 0,
+            totalPullRequests: 0,
+            longestStreak: 0
+        };
+    }
 }

@@ -10,6 +10,7 @@ export interface UserStats {
     languageText: string;
     prCount: number;
     prText: string;
+    stars: number;
 }
 
 export type AppState = "LANDING" | "LOADING" | "STORY" | "RESULT";

@@ -67,14 +67,6 @@ export default function Home() {
           )}
         </AnimatePresence>
       </main>
-      
-      {currentView === "LANDING" && (
-        <footer className="w-full max-w-md text-center space-y-4 mx-auto -mt-9">
-          <p className="text-slate-500 font-mono">
-          Made with ❤️ by <Link href="https://github.com/mrap10" className="text-red-500">mrap10</Link>
-          </p>
-        </footer>
-      )}
     </div>
   );
 }

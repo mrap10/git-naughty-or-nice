@@ -1,35 +1,21 @@
 import { UserStats } from "./types";
 
 export function calculateStats(data: any): UserStats {
-    const { user, repos, commitCount } = data;
-    const totalCommits = commitCount.totalCommitContributions;
-    const prCount = commitCount.totalPullRequestContributions;
+    const { user, repos, contributionStats } = data;
+    const totalCommits = contributionStats.totalCommits;
+    const prCount = contributionStats.totalPullRequests;
+    const longestStreak = contributionStats.longestStreak;
     
     let topLanguage = "None";
-    let maxBytes = 0;
+    let maxCount = 0;
     if (repos.languages) {
-        for (const [lang, bytes] of Object.entries(repos.languages)) {
-            if ((bytes as number) > maxBytes) {
-                maxBytes = bytes as number;
+        for (const [lang, count] of Object.entries(repos.languages)) {
+            if ((count as number) > maxCount) {
+                maxCount = count as number;
                 topLanguage = lang;
             }
         }
     }
-
-    let longestStreak = 0;
-    let currentStreak = 0;
-    const weeks = commitCount.contributionCalendar.weeks;
-    for (const week of weeks) {
-        for (const day of week.contributionDays) {
-            if (day.contributionCount > 0) {
-                currentStreak++;
-            } else {
-                longestStreak = Math.max(longestStreak, currentStreak);
-                currentStreak = 0;
-            }
-        }
-    }
-    longestStreak = Math.max(longestStreak, currentStreak);
 
     const commitText = getCommitText(totalCommits);
     const languageText = getLanguageText(topLanguage);
@@ -52,7 +38,7 @@ export function calculateStats(data: any): UserStats {
     else verdictReason = "Someone's been slacking off... Coal for you!";
 
     return {
-        username: user.name || "Developer",
+        username: user.login || user.name || "Developer",
         totalCommits,
         topLanguage,
         longestStreak,
@@ -62,7 +48,8 @@ export function calculateStats(data: any): UserStats {
         commitText,
         languageText,
         prCount,
-        prText
+        prText,
+        stars: repos.stars
     };
 }
 

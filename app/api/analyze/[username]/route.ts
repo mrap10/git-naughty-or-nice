@@ -1,7 +1,7 @@
 import { calculateStats } from "@/lib/algorithm";
-import { getLanguageStats, getRepoCommits, getStarsAndForks, getTopRepo, getUser, getUserPublicRepos } from "@/lib/github";
+import { getLanguageStats, getContributionStats, getStarsAndForks, getTopRepo, getUser, getUserPublicRepos } from "@/lib/github";
 
-export async function GET(request: Request, { params }: { params: { username: string } }) {
+export async function GET(_: Request, { params }: { params: { username: string } }) {
     const { username } = await params;
 
     if (!username) {
@@ -12,9 +12,9 @@ export async function GET(request: Request, { params }: { params: { username: st
         const user = await getUser(username);
         const repos = await getUserPublicRepos(username);
         const { stars, forks } = getStarsAndForks(repos);
-        const languages = await getLanguageStats(username, repos);
+        const languages = await getLanguageStats(repos);
         const topRepo = getTopRepo(repos);
-        const commitCount = await getRepoCommits(username);
+        const contributionStats = await getContributionStats(username);
 
         const rawData = {
             user,
@@ -25,7 +25,7 @@ export async function GET(request: Request, { params }: { params: { username: st
                 topRepo,
                 languages,
             },
-            commitCount,
+            contributionStats,
         };
 
         const stats = calculateStats(rawData);

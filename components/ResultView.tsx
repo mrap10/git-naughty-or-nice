@@ -52,7 +52,7 @@ export default function ResultView({ stats, onReset }: ResultViewProps) {
         <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }} 
-            className="flex flex-col items-center max-w-md w-full px-4 gap-6"
+            className="flex flex-col items-center max-w-md w-full px-4 gap-4 my-2"
         >
             <div className="w-full flex items-center justify-between text-slate-400 font-mono">
                 <button onClick={onReset} className="flex items-center gap-2 hover:text-white cursor-pointer transition-colors text-sm">
@@ -79,7 +79,7 @@ export default function ResultView({ stats, onReset }: ResultViewProps) {
 
                 <div className="space-y-6 font-mono text-sm relative z-10">
                     <div className="flex items-end justify-between border-b border-slate-300 pb-1">
-                        <span className="text-slate-500 text-sm uppercase">Developer</span>
+                        <span className="text-slate-500 text-sm uppercase font-medium">Developer</span>
                         <span className="font-bold text-lg">@{stats.username}</span>
                     </div>
 
@@ -92,6 +92,16 @@ export default function ResultView({ stats, onReset }: ResultViewProps) {
                             <span className="text-slate-500 text-sm block mb-1">Top Tech</span>
                             <span className="font-bold text-xl">{stats.topLanguage}</span>
                         </div>
+                        <div className="bg-slate-100 p-3 border border-slate-200">
+                            <span className="text-slate-500 text-sm block mb-1">Longest Streak</span>
+                            <span className="font-bold text-xl">{stats.longestStreak} days</span>
+                        </div>
+                        {stats.stars > 0 && (
+                            <div className="bg-slate-100 p-3 border border-slate-200">
+                                <span className="text-slate-500 text-sm block mb-1">Stars Received</span>
+                                <span className="font-bold text-xl">{stats.stars}</span>
+                            </div>
+                        )}
                     </div>
 
                     <div className="py-4 text-center relative">

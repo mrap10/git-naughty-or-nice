@@ -14,7 +14,7 @@ export default function StoryView({ stats, onComplete }: StoryViewProps) {
     const [currentSlide, setCurrentSlide] = useState(0);
     const slides = [
         {
-            bg: "bg-slate-900",
+            bg: "bg-gray-950",
             content: (
                 <div className="flex flex-col items-center text-center space-y-6">
                     <div className="w-32 h-32 rounded-full bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20 mb-4 shadow-[0_0_30px_rgba(16,185,129,0.2)]">
@@ -26,17 +26,18 @@ export default function StoryView({ stats, onComplete }: StoryViewProps) {
                             {stats.totalCommits}
                         </p>
                         <p className="text-slate-400 uppercase tracking-widest">Commits in 2025</p>
+                        <p className="text-slate-400 font-mono text-xs tracking-wide">(Public Repos)</p>
                     </div>
-                    <p className="text-slate-300 max-w-[250px]">
+                    <p className="text-slate-300 italic max-w-[250px]">
                         {stats.commitText}
                     </p>
                 </div>
             )
         }, {
-            bg: "bg-slate-900",
+            bg: "bg-gray-950",
             content: (
                 <div className="flex flex-col items-center text-center space-y-6">
-                    <div className="w-32 h-32 rounded-full bg-blue-500/10 flex items-center justify-center border border-b-blue-500/20 mb-4 shadow-[0_0_30px_rgba(59,130,246,0.2)]">
+                    <div className="w-32 h-32 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20 mb-4 shadow-[0_0_30px_rgba(59,130,246,0.2)]">
                         <Code2 size={48} className="text-blue-400" />
                     </div>
                     <h1 className="text-3xl font-bold">The Tongue</h1>
@@ -46,13 +47,13 @@ export default function StoryView({ stats, onComplete }: StoryViewProps) {
                         </p>
                         <p className="text-slate-400 uppercase tracking-widest">Most Used</p>
                     </div>
-                    <p className="text-slate-300 max-w-[250px]">
+                    <p className="text-slate-300 italic max-w-[250px]">
                         {stats.languageText}
                     </p>
                 </div>
             )
         }, {
-            bg: "bg-slate-900",
+            bg: "bg-gray-950",
             content: (
                 <div className="flex flex-col items-center text-center space-y-6">
                     <div className="w-32 h-32 rounded-full bg-purple-500/10 flex items-center justify-center border border-purple-500/20 mb-4 shadow-[0_0_30px_rgba(139,92,246,0.2)]">
@@ -65,17 +66,17 @@ export default function StoryView({ stats, onComplete }: StoryViewProps) {
                         </p>
                         <p className="text-slate-400 uppercase tracking-widest">PRs Merged</p>
                     </div>
-                    <p className="text-slate-300 max-w-[250px]">
+                    <p className="text-slate-300 italic max-w-[250px]">
                         {stats.prText}
                     </p>
                 </div>
             )
         }, {
-            bg: "bg-slate-900",
+            bg: "bg-gray-950",
             content: (
                 <div className="flex flex-col items-center text-center space-y-8">
                     <div className="relative">
-                        <div className="absolute bg-red-500/20 blur-xl rounded-full animate-pulse"/>
+                        <div className="absolute -inset-4 bg-red-500/20 blur-xl rounded-full animate-pulse"/>
                         <Flame size={64} className="text-red-400 relative z-10" />
                     </div>
                     <h1 className="text-4xl font-bold uppercase tracking-widest">The Verdict</h1>
