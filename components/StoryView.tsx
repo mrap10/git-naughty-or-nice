@@ -1,7 +1,7 @@
 "use client";
 
 import { UserStats } from "@/lib/types";
-import { Code2, Flame, GitCommit, GitPullRequest } from "lucide-react";
+import { Code2, Flame, GitCommit, GitPullRequest, Pause, Play, ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 
@@ -12,6 +12,7 @@ interface StoryViewProps {
 
 export default function StoryView({ stats, onComplete }: StoryViewProps) {
     const [currentSlide, setCurrentSlide] = useState(0);
+    const [isPaused, setIsPaused] = useState(false);
     const slides = [
         {
             bg: "bg-gray-950",
@@ -89,6 +90,8 @@ export default function StoryView({ stats, onComplete }: StoryViewProps) {
     ]
 
     useEffect(() => {
+        if (isPaused) return;
+
         const timer = setTimeout(() => {
             if (currentSlide < slides.length - 1) {
                 setCurrentSlide(currentSlide + 1);
@@ -97,7 +100,23 @@ export default function StoryView({ stats, onComplete }: StoryViewProps) {
             }
         }, 4000);
         return () => clearTimeout(timer);
-    }, [currentSlide, onComplete, slides.length]);
+    }, [currentSlide, onComplete, slides.length, isPaused]);
+
+    const handleNext = () => {
+        setIsPaused(false);
+        if (currentSlide < slides.length - 1) {
+            setCurrentSlide(c => c + 1);
+        } else {
+            onComplete();
+        }
+    };
+
+    const handlePrev = () => {
+        setIsPaused(false)
+        if (currentSlide > 0) {
+            setCurrentSlide(c => c - 1);
+        }
+    };
     
     return (
         <motion.div
@@ -105,22 +124,61 @@ export default function StoryView({ stats, onComplete }: StoryViewProps) {
             animate={{ opacity: 1, scale: 1 }}
             className="relative w-full max-w-sm aspect-[9/16] bg-black rounded-2xl border border-slate-800 shadow-2xl overflow-hidden flex flex-col"
         >
+            <style>{`
+                @keyframes grow {
+                    from { width: 0%; }
+                    to { width: 100%; }
+                }
+            `}</style>
+
             <div className="absolute top-0 left-0 right-0 p-2 z-20 flex gap-1">
                 {slides.map((_, index) => (
                     <div key={index} className="h-1 flex-1 bg-slate-800 rounded-full overflow-hidden">
-                        <motion.div
-                            initial={{ width: "0%" }}
-                            animate={{ width: index < currentSlide ? "100%" : index === currentSlide ? "100%" : "0%" }}
-                            transition={{ duration: index === currentSlide ? 4 : 0, ease: "linear" }}
+                        <div
                             className="h-full bg-white"
+                            style={{
+                                width: index < currentSlide ? "100%" : "0%",
+                                animationName: index === currentSlide ? "grow" : "none",
+                                animationDuration: "4s",
+                                animationTimingFunction: "linear",
+                                animationFillMode: "forwards",
+                                animationPlayState: isPaused ? "paused" : "running"
+                            }}
                         />
                     </div>
                 ))}
             </div>
 
-            <div className="absolute inset-0 z-10 flex">
-                <div className="w-1/3 h-full" onClick={() => setCurrentSlide(c => Math.max(0, c - 1))} />
-                <div className="w-2/3 h-full" onClick={() => setCurrentSlide(c => Math.min(slides.length - 1, c + 1))} />
+            <div className="absolute inset-0 z-10 flex flex-col justify-between p-4 pointer-events-none">
+                <div className="flex justify-end pointer-events-auto">
+                     <button onClick={() => setIsPaused(!isPaused)} className="p-2 bg-black/20 backdrop-blur-sm rounded-full hover:bg-black/40 transition-colors text-white/70 hover:text-white cursor-pointer">
+                        {isPaused ? <Play size={20} fill="currentColor" /> : <Pause size={20} fill="currentColor" />}
+                     </button>
+                </div>
+
+                <div className="flex justify-between items-center w-full px-2">
+                    <div className="pointer-events-auto">
+                        {currentSlide > 0 && (
+                            <button onClick={handlePrev} className="bg-black/20 backdrop-blur-sm rounded-full hover:bg-black/40 transition-colors text-white/20 hover:text-white cursor-pointer">
+                                <ChevronLeft size={24} />
+                            </button>
+                        )}
+                    </div>
+                    <div className="pointer-events-auto">
+                        {currentSlide < slides.length - 1 && (
+                            <button onClick={handleNext} className="bg-black/20 backdrop-blur-sm rounded-full hover:bg-black/40 transition-colors text-white/20 hover:text-white cursor-pointer">
+                                <ChevronRight size={24} />
+                            </button>
+                        )}
+                    </div>
+                </div>
+                
+                <div />
+            </div>
+
+            <div className="absolute inset-0 z-0 flex">
+                <div className="w-1/3 h-full" onClick={handlePrev} />
+                <div className="w-2/3 h-full" onClick={handleNext} />
             </div>
 
             <div className="flex-1 flex items-center justify-center p-6 relative z-0">
