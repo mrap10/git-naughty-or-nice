@@ -3,7 +3,9 @@
 import { useState, useEffect } from "react";
 
 export default function Snowfall() {
-  const [snowflakes, setSnowflakes] = useState<Array<{ left: string; top: string; animationDelay: string; fontSize: string }>>([]);
+  const [snowflakes, setSnowflakes] = useState<
+    Array<{ left: string; top: string; animationDelay: string; fontSize: string }>
+  >([]);
 
   //eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {

@@ -33,7 +33,7 @@ export default function ResultView({ stats, onReset }: ResultViewProps) {
       .catch((err) => {
         setError("Failed to download certificate. Please try again.");
       });
-    };
+  };
 
   const handleShare = async () => {
     if (!certificateRef.current || !navigator.share) {

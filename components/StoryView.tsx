@@ -104,7 +104,7 @@ export default function StoryView({ stats, onComplete }: StoryViewProps) {
       } else {
         onComplete();
       }
-    }, 4000);
+    }, 3000);
     return () => clearTimeout(timer);
   }, [currentSlide, onComplete, slides.length, isPaused]);
 
