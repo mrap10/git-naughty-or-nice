@@ -12,7 +12,7 @@
   "dependencies": {
     "@upstash/ratelimit": "^2.0.7",
     "@upstash/redis": "^1.35.8",
-    "canvas-confetti": "^1.9.4",
+    "@vercel/analytics": "^1.6.1",
     "html-to-image": "^1.11.13",
     "lucide-react": "^0.562.0",
     "motion": "^12.23.26",

@@ -88,7 +88,7 @@ export default function ResultView({ stats, onReset }: ResultViewProps) {
         ref={certificateRef}
         className="w-full bg-stone-100 text-slate-900 p-6 rounded-sm relative overflow-hidden transform rotate-1 hover:rotate-0 transition-transform duration-500 shadow-[0_0_50px_rgba(255,255,255,0.1)]"
       >
-        <div className="absolute inset-0 bg-[url('/public/paper.png')] opacity-20 pointer-events-none" />
+        <div className="absolute inset-0 bg-[url('../public/paper.png')] opacity-20 pointer-events-none" />
 
         <div className="border-b-2 border-slate-900 pb-4 mb-6 flex justify-between items-start">
           <div>

@@ -7,7 +7,8 @@ import {
   Space_Grotesk,
 } from "next/font/google";
 import "./globals.css";
-
+import { Analytics } from "@vercel/analytics/next";
+ 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -51,7 +52,10 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${cedarvilleCursive.variable} ${jetBrainsMono.variable} ${spaceGrotesk.variable} antialiased`}
     >
-      <body>{children}</body>
+      <body>
+        <Analytics />
+        {children}
+      </body>
     </html>
   );
 }

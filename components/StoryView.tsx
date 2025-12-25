@@ -145,7 +145,7 @@ export default function StoryView({ stats, onComplete }: StoryViewProps) {
               style={{
                 width: index < currentSlide ? "100%" : "0%",
                 animationName: index === currentSlide ? "grow" : "none",
-                animationDuration: "4s",
+                animationDuration: "3s",
                 animationTimingFunction: "linear",
                 animationFillMode: "forwards",
                 animationPlayState: isPaused ? "paused" : "running",
