@@ -38,7 +38,7 @@ export default function StoryView({ stats, onComplete }: StoryViewProps) {
             <p className="text-slate-400 uppercase tracking-widest font-grotesk">Commits in 2025</p>
             <p className="text-slate-400 font-mono text-xs tracking-wide">(Public Repos)</p>
           </div>
-          <p className="text-slate-300 italic max-w-[250px]">{stats.commitText}</p>
+          <p className="dark:text-slate-400 text-slate-600 italic max-w-[250px]">{stats.commitText}</p>
         </div>
       ),
     },
@@ -56,7 +56,7 @@ export default function StoryView({ stats, onComplete }: StoryViewProps) {
             </p>
             <p className="text-slate-400 uppercase tracking-widest font-grotesk">Most Used</p>
           </div>
-          <p className="text-slate-300 italic max-w-[250px]">{stats.languageText}</p>
+          <p className="dark:text-slate-400 text-slate-600 italic max-w-[250px]">{stats.languageText}</p>
         </div>
       ),
     },
@@ -74,7 +74,7 @@ export default function StoryView({ stats, onComplete }: StoryViewProps) {
             </p>
             <p className="text-slate-400 uppercase tracking-widest font-grotesk">PRs Merged</p>
           </div>
-          <p className="text-slate-300 italic max-w-[250px]">{stats.prText}</p>
+          <p className="dark:text-slate-400 text-slate-600 italic max-w-[250px]">{stats.prText}</p>
         </div>
       ),
     },
@@ -87,7 +87,7 @@ export default function StoryView({ stats, onComplete }: StoryViewProps) {
             <Flame size={64} className="text-red-400 relative z-10" />
           </div>
           <h1 className="text-4xl font-bold uppercase tracking-widest font-grotesk">The Verdict</h1>
-          <p className="text-slate-400 font-jetbrains text-sm">
+          <p className="dark:text-slate-400 text-slate-600 font-jetbrains text-sm">
             Calculating your naughty or nice status...
           </p>
         </div>
@@ -128,7 +128,7 @@ export default function StoryView({ stats, onComplete }: StoryViewProps) {
     <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
-      className="relative w-full max-w-sm aspect-[9/16] bg-black rounded-2xl border border-slate-800 shadow-2xl overflow-hidden flex flex-col"
+      className="relative w-full max-w-sm aspect-[9/16] bg-slate-100 dark:bg-black rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden flex flex-col"
     >
       <style>{`
                 @keyframes grow {
@@ -139,9 +139,9 @@ export default function StoryView({ stats, onComplete }: StoryViewProps) {
 
       <div className="absolute top-0 left-0 right-0 p-2 z-20 flex gap-1">
         {slides.map((_, index) => (
-          <div key={index} className="h-1 flex-1 bg-slate-800 rounded-full overflow-hidden">
+          <div key={index} className="h-1 flex-1 bg-slate-300 dark:bg-slate-800 rounded-full overflow-hidden">
             <div
-              className="h-full bg-white"
+              className="h-full bg-slate-600 dark:bg-white"
               style={{
                 width: index < currentSlide ? "100%" : "0%",
                 animationName: index === currentSlide ? "grow" : "none",
@@ -159,7 +159,7 @@ export default function StoryView({ stats, onComplete }: StoryViewProps) {
         <div className="flex justify-end pointer-events-auto">
           <button
             onClick={() => setIsPaused(!isPaused)}
-            className="p-2 bg-black/20 backdrop-blur-sm rounded-full hover:bg-black/40 transition-colors text-white/70 hover:text-white cursor-pointer"
+            className="p-2 dark:bg-black/20 bg-black/10 backdrop-blur-sm rounded-full hover:bg-black/40 transition-colors text-white/70 hover:text-white cursor-pointer"
           >
             {isPaused ? (
               <Play size={20} fill="currentColor" />
@@ -174,7 +174,7 @@ export default function StoryView({ stats, onComplete }: StoryViewProps) {
             {currentSlide > 0 && (
               <button
                 onClick={handlePrev}
-                className="bg-black/20 backdrop-blur-sm rounded-full hover:bg-black/40 transition-colors text-white/20 hover:text-white cursor-pointer"
+                className="dark:bg-black/20 bg-slate-100 backdrop-blur-sm rounded-full hover:bg-black/40 transition-colors text-black/20 dark:text-white/30 hover:text-white cursor-pointer"
               >
                 <ChevronLeft size={24} />
               </button>
@@ -184,7 +184,7 @@ export default function StoryView({ stats, onComplete }: StoryViewProps) {
             {currentSlide < slides.length - 1 && (
               <button
                 onClick={handleNext}
-                className="bg-black/20 backdrop-blur-sm rounded-full hover:bg-black/40 transition-colors text-white/20 hover:text-white cursor-pointer"
+                className="dark:bg-black/20 bg-slate-100 backdrop-blur-sm rounded-full hover:bg-black/40 transition-colors text-black/20 dark:text-white/30 hover:text-white cursor-pointer"
               >
                 <ChevronRight size={24} />
               </button>
@@ -215,7 +215,7 @@ export default function StoryView({ stats, onComplete }: StoryViewProps) {
         </AnimatePresence>
       </div>
 
-      <div className="absolute bottom-6 w-full text-center text-xs font-jetbrains text-slate-600">
+      <div className="absolute bottom-6 w-full text-center text-xs font-jetbrains text-slate-400 dark:text-slate-600">
         NAUGHTY OR NICE 2025
       </div>
     </motion.div>

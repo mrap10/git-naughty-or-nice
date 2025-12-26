@@ -69,11 +69,11 @@ export default function ResultView({ stats, onReset }: ResultViewProps) {
       <div className="w-full flex items-center justify-between text-slate-400 font-mono">
         <button
           onClick={onReset}
-          className="flex items-center gap-2 font-jetbrains hover:text-white cursor-pointer transition-colors text-xs"
+          className="flex items-center gap-2 font-jetbrains hover:text-black dark:hover:text-white cursor-pointer transition-colors text-xs"
         >
           <RefreshCcw size={14} /> Try Another
         </button>
-        <span className="text-xs border border-slate-800 font-jetbrains px-2 py-1 rounded bg-slate-900/50">
+        <span className="text-xs border border-slate-200 dark:border-slate-800 font-jetbrains px-2 py-1 rounded bg-slate-100 dark:bg-slate-900/50">
           Found a bug? Report{" "}
           <Link
             href={"https://github.com/mrap10/naughty-or-nice/issues"}
@@ -163,7 +163,7 @@ export default function ResultView({ stats, onReset }: ResultViewProps) {
       <div className="flex gap-4 w-full">
         <button
           onClick={handleDownload}
-          className="flex-1 bg-white hover:bg-slate-200 text-slate-900 font-grotesk cursor-pointer font-bold py-3 rounded-lg flex items-center justify-center gap-2 transition-colors"
+          className="flex-1 dark:bg-white bg-slate-200 hover:bg-slate-300 dark:hover:bg-slate-200 text-slate-900 font-grotesk cursor-pointer font-bold py-3 rounded-lg flex items-center justify-center gap-2 transition-colors"
         >
           <Download size={18} /> Download
         </button>

@@ -8,6 +8,7 @@ import {
 } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
+import { AppThemeProvider } from "./providers/ThemeProvider";
  
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -50,11 +51,14 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} ${cedarvilleCursive.variable} ${jetBrainsMono.variable} ${spaceGrotesk.variable} antialiased`}
     >
       <body>
+        <AppThemeProvider>
+          {children}
+        </AppThemeProvider>
         <Analytics />
-        {children}
       </body>
     </html>
   );

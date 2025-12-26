@@ -20,7 +20,7 @@ export default function Toast({ message, onClose }: ToastProps) {
       initial={{ opacity: 0, y: 50, x: "-50%" }}
       animate={{ opacity: 1, y: 0, x: "-50%" }}
       exit={{ opacity: 0, y: 20, x: "-50%" }}
-      className="fixed bottom-10 left-1/2 z-50 flex items-center gap-3 bg-red-950/70 border border-red-500/50 text-red-200 px-4 py-3 rounded-xl backdrop-blur-md shadow-xl shadow-red-900/20"
+      className="fixed bottom-10 left-1/2 z-50 flex items-center gap-3 bg-red-900 dark:bg-red-950/70 border border-red-500/50 text-red-200 px-4 py-3 rounded-xl backdrop-blur-md shadow-xl shadow-red-900/20"
     >
       <AlertCircle size={18} className="text-red-500" />
       <span className="text-sm font-medium font-jetbrains">{message}</span>

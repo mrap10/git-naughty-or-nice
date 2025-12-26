@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-cursive: var(--font-cedarville);
   --font-jetbrains: var(--font-jetbrains-mono);

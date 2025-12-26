@@ -17,19 +17,11 @@ export default function LandingView({ username, setUsername, handleSubmit }: Lan
       transition={{ duration: 0.5 }}
       className="w-full flex-1 flex flex-col items-center justify-center relative"
     >
-      <div className="fixed flex flex-col text-center font-cursive top-12 -left-4 rotate-[-20deg] text-4xl text-slate-400 z-50">
+      <div className="fixed flex flex-col text-center font-cursive md:top-12 md:-left-4 top-4 -left-4 md:rotate-[-20deg] md:text-4xl text-3xl ml-2 md:ml-0 text-slate-400 z-50">
         <p className="text-emerald-500">
           <span className="text-red-500">Merry</span> Xmas!
         </p>
       </div>
-      <Link
-        href="https://github.com/mrap10/naughty-or-nice"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="font-jetbrains text-sm fixed top-6 right-4 px-4 py-1 text-red-500 bg-slate-800 hover:bg-slate-900 transition-colors flex items-center gap-1 font-semibold rounded-lg z-50"
-      >
-        ⭐ on Github
-      </Link>
 
       <motion.div
         initial={{ y: 10 }}
@@ -41,7 +33,7 @@ export default function LandingView({ username, setUsername, handleSubmit }: Lan
         <div className="space-y-2">
           <div className="flex justify-around mb-6">
             <div className="relative">
-              <GithubIcon size={60} className="text-white relative z-10" />
+              <GithubIcon size={60} className="dark:text-white text-slate-700 relative z-10" />
               <div className="absolute inset-0 bg-red-500 blur-lg opacity-25 animate-pulse" />
             </div>
           </div>
@@ -56,7 +48,7 @@ export default function LandingView({ username, setUsername, handleSubmit }: Lan
 
         <form onSubmit={handleSubmit} className="relative group w-full">
           <div className="absolute -inset-1 bg-gradient-to-r from-red-500 to-emerald-600 blur opacity-25 group-hover:opacity-50 transition duration-700"></div>
-          <div className="relative p-3 flex justify-between items-center bg-black rounded-lg border border-slate-800">
+          <div className="relative p-3 flex justify-between items-center bg-white dark:bg-black rounded-lg border border-slate-200 dark:border-slate-800">
             <div className="flex gap-2 items-center font-mono w-full">
               <p className="text-slate-500 select-none hidden sm:block font-jetbrains text-sm">
                 github.com/
@@ -67,13 +59,13 @@ export default function LandingView({ username, setUsername, handleSubmit }: Lan
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="username"
                 autoFocus
-                className="flex-1 border-none outline-none bg-transparent font-jetbrains text-white px-0 sm:px-3 py-2 placeholder:text-slate-700 min-w-0"
+                className="flex-1 border-none outline-none bg-transparent font-jetbrains text-black dark:text-white px-0 sm:px-3 py-2 placeholder:text-slate-700 min-w-0"
               />
             </div>
             <button
               type="submit"
               disabled={!username.trim()}
-              className="bg-slate-100 hover:bg-slate-200 text-black cursor-pointer font-grotesk font-semibold py-2 px-4 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 min-w-[100px] justify-center"
+              className="dark:bg-slate-100 bg-black hover:bg-slate-700 dark:hover:bg-slate-200 text-white dark:text-black cursor-pointer font-grotesk font-semibold py-2 px-4 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 min-w-[100px] justify-center"
             >
               Analyze
             </button>

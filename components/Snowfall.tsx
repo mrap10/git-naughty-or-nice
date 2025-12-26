@@ -22,7 +22,7 @@ export default function Snowfall() {
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
       {snowflakes.map((flake, i) => (
-        <div key={i} className="absolute text-slate-700/20 text-xs animate-pulse" style={flake}>
+        <div key={i} className="absolute dark:text-slate-700/30 text-slate-400/30 text-xs animate-pulse" style={flake}>
           ❄
         </div>
       ))}
